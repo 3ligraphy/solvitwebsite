@@ -117,14 +117,17 @@ export default function Hero() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </motion.div>
             </motion.a>
-            <motion.button 
+            <motion.a 
+              href="https://aifrontend-one.vercel.app/" 
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="btn-secondary flex items-center group"
             >
               <Play className="mr-2 w-4 h-4 group-hover:text-cyan-400 transition-colors" />
               Watch Demo
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Features */}

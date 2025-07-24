@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import { 
   Mail, 
   Phone, 
@@ -19,6 +20,8 @@ import {
 
 export default function Contact() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -33,28 +36,21 @@ export default function Contact() {
     {
       icon: Phone,
       title: "Phone",
-      details: ["+1 (555) 123-4567", "+1 (555) 987-6543"],
+      details: ["+20 155 310 0916"],
       action: "Call us now",
       color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Mail,
       title: "Email",
-      details: ["info@solvitai.com", "support@solvitai.com"],
+      details: ["3ligrphy@gmail.com"],
       action: "Send us an email",
       color: "from-purple-500 to-pink-500"
     },
     {
-      icon: MapPin,
-      title: "Office",
-      details: ["123 AI Innovation Drive", "Silicon Valley, CA 94025"],
-      action: "Visit our office",
-      color: "from-emerald-500 to-teal-500"
-    },
-    {
       icon: Clock,
       title: "Business Hours",
-      details: ["Monday - Friday: 9:00 AM - 6:00 PM PST", "24/7 Support Available"],
+      details: ["Sunday - Thursday: 9:00 AM - 6:00 PM EET", "24/7 Support Available"],
       action: "Get support anytime",
       color: "from-orange-500 to-yellow-500"
     }
@@ -74,6 +70,59 @@ export default function Contact() {
       ...prev,
       [e.target.name]: e.target.value
     }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    
+    try {
+      // EmailJS configuration
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_solvit'
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_solvit'
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'your_public_key'
+
+      // Email template parameters
+      const templateParams = {
+        to_name: 'SolvIt AI Team',
+        to_email: '3ligrphy@gmail.com',
+        from_name: `${formData.firstName} ${formData.lastName}`,
+        from_email: formData.email,
+        company: formData.company,
+        phone: formData.phone || 'Not provided',
+        service: formData.service,
+        message: formData.message,
+        reply_to: formData.email
+      }
+
+      // Send email using EmailJS
+      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey)
+      
+      if (result.status === 200) {
+        setSubmitStatus('success')
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          company: '',
+          phone: '',
+          service: '',
+          message: ''
+        })
+        // Reset success message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000)
+      } else {
+        setSubmitStatus('error')
+        setTimeout(() => setSubmitStatus('idle'), 5000)
+      }
+    } catch (error) {
+      console.error('Error sending email:', error)
+      setSubmitStatus('error')
+      setTimeout(() => setSubmitStatus('idle'), 5000)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const containerVariants = {
@@ -167,7 +216,7 @@ export default function Contact() {
                 </div>
                 <h3 className="text-2xl font-bold text-white">Request Consultation</h3>
               </div>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="relative">
                     <label htmlFor="firstName" className="block text-sm font-medium text-white mb-2">
@@ -277,14 +326,59 @@ export default function Contact() {
                     placeholder="Tell us about your automation needs and business goals..."
                   />
                 </div>
+                {/* Status Messages */}
+                {submitStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-green-500/20 border border-green-500/30 text-green-400 px-4 py-3 rounded-lg mb-4 flex items-center"
+                  >
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 0.5 }}
+                      className="w-5 h-5 mr-2"
+                    >
+                      ✓
+                    </motion.div>
+                    Message sent successfully! We'll get back to you soon.
+                  </motion.div>
+                )}
+                
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-500/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg mb-4 flex items-center"
+                  >
+                    <span className="w-5 h-5 mr-2">⚠</span>
+                    Failed to send message. Please try again or contact us directly.
+                  </motion.div>
+                )}
+
                 <motion.button
                   type="submit"
-                  className="w-full btn-primary flex items-center justify-center relative overflow-hidden"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={isSubmitting}
+                  className={`w-full btn-primary flex items-center justify-center relative overflow-hidden transition-all duration-300 ${
+                    isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:scale-102'
+                  }`}
+                  whileHover={isSubmitting ? {} : { scale: 1.02 }}
+                  whileTap={isSubmitting ? {} : { scale: 0.98 }}
                 >
-                  <Send className="w-5 h-5 mr-2" />
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        className="w-5 h-5 mr-2 border-2 border-white/30 border-t-white rounded-full"
+                      />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 mr-2" />
+                      Send Message
+                    </>
+                  )}
                 </motion.button>
               </form>
             </div>

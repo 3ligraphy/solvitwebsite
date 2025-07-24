@@ -73,15 +73,11 @@ export default function Footer() {
               <div className="space-y-2">
                 <div className="flex items-center space-x-2 text-gray-300">
                   <Mail className="w-4 h-4" />
-                  <span>info@solvitai.com</span>
+                  <span>3ligrphy@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-2 text-gray-300">
                   <Phone className="w-4 h-4" />
-                  <span>+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center space-x-2 text-gray-300">
-                  <MapPin className="w-4 h-4" />
-                  <span>Silicon Valley, CA</span>
+                  <span>+20 155 310 0916</span>
                 </div>
               </div>
             </div>

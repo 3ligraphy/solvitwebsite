@@ -64,20 +64,20 @@ export default function Header() {
           {/* Contact Info */}
           <div className="hidden lg:flex items-center space-x-4">
             <motion.a 
-              href="tel:+1234567890" 
+              href="tel:+201553100916" 
               whileHover={{ scale: 1.05 }}
               className="flex items-center space-x-2 text-sm text-white/70 hover:text-cyan-400 transition-all duration-300"
             >
               <Phone className="w-4 h-4" />
-              <span>+1 (234) 567-890</span>
+              <span>+20 155 310 0916</span>
             </motion.a>
             <motion.a 
-              href="mailto:info@solvitai.com" 
+              href="mailto:3ligrphy@gmail.com" 
               whileHover={{ scale: 1.05 }}
               className="flex items-center space-x-2 text-sm text-white/70 hover:text-cyan-400 transition-all duration-300"
             >
               <Mail className="w-4 h-4" />
-              <span>info@solvitai.com</span>
+              <span>3ligrphy@gmail.com</span>
             </motion.a>
           </div>
 
