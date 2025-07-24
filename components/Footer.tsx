@@ -12,6 +12,7 @@ import {
   Facebook
 } from 'lucide-react'
 
+
 export default function Footer() {
   const companyLinks = [
     { name: 'About Us', href: '#about' },
