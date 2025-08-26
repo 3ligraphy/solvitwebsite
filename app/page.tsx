@@ -6,6 +6,7 @@ import Hero from '../components/Hero'
 import Services from '../components/Services'
 import Solutions from '../components/Solutions'
 import About from '../components/About'
+import Pricing from '../components/Pricing'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 
@@ -47,6 +48,15 @@ export default function Home() {
           viewport={{ once: true }}
         >
           <About />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <Pricing />
         </motion.div>
         
         <motion.div
