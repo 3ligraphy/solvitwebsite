@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import emailjs from '@emailjs/browser'
+import Link from 'next/link'
 import { 
   Mail, 
   Phone, 
@@ -445,15 +446,17 @@ export default function Contact() {
                   <p className="text-blue-100 mb-4">
                     Experience our AI automation solutions with a personalized demonstration.
                   </p>
-                  <motion.button 
-                    className="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200 flex items-center group"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Book Demo
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
-                  </motion.button>
+                                      <Link href="/demo">
+                      <motion.button 
+                        className="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200 flex items-center group"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Calendar className="w-4 h-4 mr-2" />
+                        Book Demo
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
+                      </motion.button>
+                    </Link>
                 </div>
               </div>
             </motion.div>

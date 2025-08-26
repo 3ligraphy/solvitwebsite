@@ -302,7 +302,7 @@ export default function Solutions() {
           
           <div className="mt-8 text-center">
             <motion.a 
-              href="#contact" 
+              href="/demo" 
               className="btn-primary inline-flex items-center group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}

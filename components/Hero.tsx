@@ -118,7 +118,7 @@ export default function Hero() {
               </motion.div>
             </motion.a>
             <motion.a 
-              href="https://aifrontend-one.vercel.app/" 
+              href="/demo" 
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
