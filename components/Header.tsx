@@ -12,6 +12,7 @@ export default function Header() {
     { name: 'Services', href: '#services' },
     { name: 'Solutions', href: '#solutions' },
     { name: 'About', href: '#about' },
+    { name: 'Company Profile', href: '/company-profile' },
     { name: 'Contact', href: '#contact' },
   ]
 
