@@ -298,7 +298,7 @@ export default function CompanyProfile() {
               </motion.a>
               
               <motion.a 
-                href="/solveit_company_profile.pdf"
+                href="/SolvIt_AI_Company_Profile2.pdf"
                 download="SolvIt_AI_Company_Profile.pdf"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -767,7 +767,7 @@ export default function CompanyProfile() {
                     <Mail className="ml-2 w-4 h-4" />
                   </motion.a>
                   <motion.a 
-                    href="/solveit_company_profile.pdf"
+                    href="/SolvIt_AI_Company_Profile2.pdf"
                     download="SolvIt_AI_Company_Profile.pdf"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
