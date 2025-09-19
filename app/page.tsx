@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
-import Services from '../components/Services'
+import Services from '../components/ServicesFromCMS'
 import Solutions from '../components/Solutions'
 import About from '../components/About'
 import Pricing from '../components/Pricing'
